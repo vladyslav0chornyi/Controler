@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контролер автоматики</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Контролер автоматики</h1>
+
+        <!-- Навігаційні вкладки -->
+        <ul class="tabs">
+            <li class="tab-link active" data-tab="tab-1">Інформація</li>
+            <li class="tab-link" data-tab="tab-2">Конфігурація</li>
+            <li class="tab-link" data-tab="tab-3">Логи</li>
+        </ul>
+
+        <!-- Вміст вкладок -->
+        <div id="tab-1" class="tab-content active">
+            <!-- Інформація про пристрій -->
+            <div class="info">
+                <h2>Інформація про пристрій</h2>
+                <table class="info-table">
+                    <tbody>
+                        <tr>
+                            <th>Версія пристрою</th>
+                            <td id="device-version">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>Поточна дата</th>
+                            <td id="current-date">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>Поточний час</th>
+                            <td id="current-time">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>IP Eth1</th>
+                            <td id="eth1">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>IP Eth2</th>
+                            <td id="eth2">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>Завантаження CPU</th>
+                            <td id="current-CPU">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>Завантаження RAM</th>
+                            <td id="current-RAM">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>Температура пристрою</th>
+                            <td id="current-Temperature">Завантаження...</td>
+                        </tr>
+                        <tr>
+                            <th>Температура в Києві</th>
+                            <td id="kyiv-temperature">Завантаження...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="tab-2" class="tab-content">
+            <!-- Параметри конфігурації -->
+            <div class="config">
+                <h2>Параметри конфігурації</h2>
+                <form id="config-form">
+                    <table class="config-table">
+                        <tbody>
+                            <tr>
+                                <th class="param1">Параметр 1</th>
+                                <td><input type="number" id="param1" name="param1" step="0.1" required></td>
+                            </tr>
+                            <tr>
+                                <th class="param2">Параметр 2</th>
+                                <td><input type="number" id="param2" name="param2" step="0.1" required></td>
+                            </tr>
+                            <tr>
+                                <th class="param3">Параметр 3</th>
+                                <td><input type="number" id="param3" name="param3" step="0.1" required></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit">Зберегти</button>
+                </form>
+                <button id="apply-button">Застосувати</button>
+                <p id="status"></p>
+            </div>
+        </div>
+
+        <div id="tab-3" class="tab-content">
+            <!-- Логи -->
+            <div class="logs">
+                <h2>Історія змін конфігурації</h2>
+                <ul id="log-list">
+                    <li>Завантаження логів...</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

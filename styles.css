@@ -1,0 +1,154 @@
+/* Загальний стиль для тіла сторінки */
+body {
+    font-family: Arial, sans-serif; /* Основний шрифт для сторінки */
+    background-color: #f9f9f9; /* Фоновий колір */
+    margin: 0; /* Відступи */
+    padding: 0; /* Поля */
+}
+
+/* Стиль контейнера */
+.container {
+    max-width: 800px; /* Максимальна ширина */
+    margin: 20px auto; /* Центрування контейнера */
+    background-color: #fff5ee; /* Фоновий колір */
+    border-radius: 8px; /* Закруглені кути */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тінь контейнера */
+    padding: 20px; /* Внутрішні відступи */
+}
+
+/* Заголовки */
+h1 {
+    color: #333; /* Колір тексту */
+    text-align: center; /* Вирівнювання по центру */
+}
+
+h2 {
+    color: #333; /* Колір тексту */
+    text-align: center; /* Вирівнювання по центру */
+}
+
+/* Вкладки навігації */
+.tabs {
+    display: flex; /* Розташування елементів у рядок */
+    list-style: none; /* Відсутність маркерів списку */
+    padding: 0; /* Внутрішні відступи */
+    margin: 0 0 20px 0; /* Зовнішні відступи */
+    border-bottom: 2px solid #ddd; /* Нижня лінія */
+}
+
+.tab-link {
+    flex: 1; /* Рівний розподіл вкладок */
+    text-align: center; /* Вирівнювання тексту */
+    padding: 10px 0; /* Внутрішні відступи */
+    cursor: pointer; /* Вказівник на вкладку */
+    background-color: #f2f2f2; /* Фоновий колір */
+    border: 1px solid #ddd; /* Рамка */
+    border-bottom: none; /* Відсутність нижньої рамки */
+    font-weight: bold; /* Жирний текст */
+    color: #555; /* Колір тексту */
+}
+
+.tab-link.active {
+    background-color: #fff; /* Фоновий колір активної вкладки */
+    color: #000; /* Колір тексту активної вкладки */
+    border-bottom: 2px solid #fff; /* Нижня рамка активної вкладки */
+}
+
+.tab-content {
+    display: none; /* Відображення лише активної вкладки */
+}
+
+.tab-content.active {
+    display: block; /* Відображення активної вкладки */
+}
+
+/* Таблиця інформації */
+.info-table {
+    width: 100%; /* Ширина таблиці */
+    border-collapse: collapse; /* Злиття меж */
+    margin-top: 10px; /* Відступ зверху */
+}
+
+.info-table th,
+.info-table td {
+    padding: 10px; /* Внутрішні відступи */
+    border: 2px solid #ddd; /* Рамка */
+    text-align: left; /* Вирівнювання тексту */
+}
+
+.info-table th {
+    background-color: #f2f2f2; /* Фоновий колір заголовків */
+    color: #333; /* Колір тексту заголовків */
+    width: 40%; /* Ширина стовпця */
+}
+
+/* Таблиця конфігурації */
+.config-table {
+    width: 100%; /* Ширина таблиці */
+    border-collapse: collapse; /* Злиття меж */
+    margin-top: 10px; /* Відступ зверху */
+}
+
+.config-table th,
+.config-table td {
+    padding: 10px; /* Внутрішні відступи */
+    border: 2px solid #ddd; /* Рамка */
+    text-align: left; /* Вирівнювання тексту */
+}
+
+/* Кнопки */
+button {
+    display: block; /* Відображення кнопок у блоці */
+    width: 100%; /* Ширина кнопки на весь контейнер */
+    padding: 15px 20px; /* Збільшені внутрішні відступи */
+    font-size: 16px; /* Розмір тексту */
+    color: #fff; /* Колір тексту */
+    background-color: #28a745; /* Зелений колір фону */
+    border: none; /* Відсутність рамки */
+    border-radius: 5px; /* Закруглені кути */
+    cursor: pointer; /* Вказівник */
+    text-align: center; /* Вирівнювання тексту */
+    margin-bottom: 15px; /* Збільшений зазор між кнопками */
+    margin-top: 20px; /* Верхній відступ для опускання кнопок */
+    transition: all 0.3s ease; /* Плавна анімація */
+}
+
+button:hover {
+    background-color: #218838; /* Темніший зелений при наведенні */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тінь при наведенні */
+    transform: scale(1.02); /* Збільшення кнопки */
+}
+
+button:active {
+    background-color: #1e7e34; /* Ще темніший зелений при натисканні */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Зменшена тінь при натисканні */
+    transform: scale(0.98); /* Легке зменшення кнопки */
+}
+
+button:disabled {
+    background-color: #cccccc; /* Сірий колір для вимкненої кнопки */
+    cursor: not-allowed; /* Заборонений курсор */
+}
+
+/* Логи */
+.logs {
+    background-color: #f9f9f9; /* Фоновий колір */
+    border: 1px solid #ddd; /* Рамка */
+    border-radius: 4px; /* Закруглені кути */
+    padding: 10px; /* Внутрішні відступи */
+    max-height: 300px; /* Максимальна висота */
+    overflow-y: auto; /* Прокрутка по вертикалі */
+}
+
+#log-list {
+    list-style: none; /* Відсутність маркерів списку */
+    padding: 0; /* Внутрішні відступи */
+}
+
+#log-list li {
+    margin: 5px 0; /* Відступ між елементами списку */
+    padding: 5px; /* Внутрішні відступи */
+    background-color: #e7f3fe; /* Фоновий колір елементів списку */
+    border-left: 3px solid #2196F3; /* Ліва рамка */
+    font-size: 14px; /* Розмір тексту */
+}
