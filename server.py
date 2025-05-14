@@ -44,8 +44,12 @@ def log_detailed_change(old_config, new_config):
 
 
 def get_current_config():
-    with open(CONFIG_FILE, 'r') as f:
-        return json.load(f)
+    if os.path.exists(CONFIG_FILE) and os.stat(CONFIG_FILE).st_size > 0:  # Перевіряємо, чи файл існує і чи його розмір більший за 0
+        with open(CONFIG_FILE, 'r') as f:
+            return json.load(f)
+    else:
+        print(f"Файл {CONFIG_FILE} порожній або не існує. Використовується стандартна конфігурація.")
+        return default_config  # Повертаємо стандартну конфігурацію, якщо файл порожній
 
 
 def save_new_config(new_config):
