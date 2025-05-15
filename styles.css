@@ -152,3 +152,28 @@ button:disabled {
     border-left: 3px solid #2196F3; /* Ліва рамка */
     font-size: 14px; /* Розмір тексту */
 }
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 1000;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification.success {
+    background-color: #4caf50; /* Зелений */
+}
+
+.notification.error {
+    background-color: #f44336; /* Червоний */
+}
+
+.notification:hover {
+    opacity: 0.8;
+}
