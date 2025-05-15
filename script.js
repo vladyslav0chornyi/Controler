@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM повністю завантажено");
 
+    // Завантаження початкових параметрів із config.json
+    fetchConfigFromFile();
+
     // Перемикання вкладок
     const tabLinks = document.querySelectorAll(".tab-link");
     const tabContents = document.querySelectorAll(".tab-content");
@@ -22,9 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 fetchConfigWithAjax();
             } else if (tabId === "logs-tab") {
                 fetchLogsWithAjax();
+                fetchConfigFromFile(); // Завантажуємо параметри з файлу при переході на вкладку "Логи"
             }
         });
     });
+
+    // Перевірка, чи вкладка "Логи" активна при завантаженні сторінки
+    const activeTab = document.querySelector(".tab-link.active");
+    if (activeTab && activeTab.getAttribute("data-tab") === "logs-tab") {
+        fetchLogsWithAjax(); // Завантажуємо логи, якщо вкладка "Логи" активна
+    }
 
     // Обробка першої вкладки
     fetchDeviceInfo();
@@ -74,6 +84,18 @@ function fetchDeviceInfo() {
 function updateElementText(id, text) {
     const element = document.getElementById(id);
     if (element) element.textContent = text;
+}
+
+// Завантаження конфігурації з файлу config.json
+function fetchConfigFromFile() {
+    fetch('/config.json')
+        .then(response => response.json())
+        .then(data => {
+            setInputValue("param1", data.param1 || 0);
+            setInputValue("param2", data.param2 || 0);
+            setInputValue("param3", data.param3 || 0);
+        })
+        .catch(error => console.error("Помилка завантаження параметрів з файлу:", error));
 }
 
 // AJAX: Завантаження конфігурації
