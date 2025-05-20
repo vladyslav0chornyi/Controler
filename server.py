@@ -8,8 +8,8 @@ import subprocess
 import requests  # Потрібно встановити через pip, якщо ще не встановлено
 
 PORT = 8080
-CONFIG_FILE = "config.json"
-LOG_FILE = "logs.json"
+CONFIG_FILE = "data/config.json"
+LOG_FILE = "data/logs.json"
 OPENWEATHER_API_KEY = "af2767b5f752139f4282b9626e76008e"  # Вставте ваш API ключ тут
 
 # Ініціалізація конфігурації
@@ -23,12 +23,37 @@ if not os.path.exists(LOG_FILE):
         json.dump({"logs": []}, f)
 
 
+def load_initial_files():
+    """
+    Вичитує файли config і logs при старті сервера.
+    """
+    global current_config, log_data
+
+    # Завантаження конфігурації
+    if os.path.exists(CONFIG_FILE) and os.stat(CONFIG_FILE).st_size > 0:
+        with open(CONFIG_FILE, 'r') as f:
+            current_config = json.load(f)
+            print("Файл config.json успішно завантажено.")
+    else:
+        current_config = default_config
+        print("Файл config.json відсутній або порожній. Використовується стандартна конфігурація.")
+
+    # Завантаження логів
+    if os.path.exists(LOG_FILE) and os.stat(LOG_FILE).st_size > 0:
+        with open(LOG_FILE, 'r') as f:
+            log_data = json.load(f)
+            print("Файл logs.json успішно завантажено.")
+    else:
+        log_data = {"logs": []}
+        print("Файл logs.json відсутній або порожній. Логи ініціалізовані.")
+
+
 def log_change(change_message):
-    with open(LOG_FILE, 'r+') as f:
-        logs = json.load(f)
-        logs["logs"].append(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - {change_message}")
-        f.seek(0)
-        json.dump(logs, f)
+    global log_data
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    log_data["logs"].append(f"{timestamp} - {change_message}")
+    with open(LOG_FILE, 'w') as f:
+        json.dump(log_data, f)
 
 
 def log_detailed_change(old_config, new_config):
@@ -44,15 +69,12 @@ def log_detailed_change(old_config, new_config):
 
 
 def get_current_config():
-    if os.path.exists(CONFIG_FILE) and os.stat(CONFIG_FILE).st_size > 0:  # Перевіряємо, чи файл існує і чи його розмір більший за 0
-        with open(CONFIG_FILE, 'r') as f:
-            return json.load(f)
-    else:
-        print(f"Файл {CONFIG_FILE} порожній або не існує. Використовується стандартна конфігурація.")
-        return default_config  # Повертаємо стандартну конфігурацію, якщо файл порожній
+    return current_config
 
 
 def save_new_config(new_config):
+    global current_config
+    current_config = new_config
     with open(CONFIG_FILE, 'w') as f:
         json.dump(new_config, f)
 
@@ -165,16 +187,15 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(current_config).encode())
 
         elif path == '/api/logs':
-            with open(LOG_FILE, 'r') as f:
-                logs = json.load(f)
+            global log_data
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
-            self.wfile.write(json.dumps(logs).encode())
+            self.wfile.write(json.dumps(log_data).encode())
 
         else:
             if path == '/':
-                path = '/index.html'
+                path = '/static/index.html'
             super().do_GET()
 
     def do_POST(self):
@@ -208,6 +229,10 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
 
 
+# Завантаження початкових файлів
+load_initial_files()
+
+# Запуск сервера
 with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
     print(f"Сервер запущено на порту {PORT}")
     httpd.serve_forever()
